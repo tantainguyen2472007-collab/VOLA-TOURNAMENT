@@ -1,4 +1,4 @@
-﻿import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useMapVeto } from "../features/map-veto/useMapVeto";
 import { useAuth } from "../hooks/useAuth";
 import { VALORANT_MAPS } from "../features/map-veto/engine";

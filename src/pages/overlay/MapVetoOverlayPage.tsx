@@ -1,3 +1,3 @@
-﻿import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useMapVeto } from "../../features/map-veto/useMapVeto";
 export function MapVetoOverlayPage(){const {roomId}=useParams<{roomId:string}>();const {state,loading}=useMapVeto(roomId,"viewer");if(loading||!state)return <div className="overlay-frame">Đang tải...</div>;return <div className="overlay-frame"><div className="overlay-head"><strong>TEAM A</strong><span>VALORANT · BO3</span><strong>TEAM B</strong></div><div className="overlay-turn">{state.status==="completed"?"VETO HOÀN TẤT":state.phase.replaceAll("_"," ")}</div><div className="overlay-maps">{state.maps.map(map=><div className={`overlay-map ${map.status}`} key={map.id}><b>{map.id}</b><small>{map.status}</small></div>)}</div></div>}

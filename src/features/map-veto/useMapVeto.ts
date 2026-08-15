@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 import { createInitialMapVetoState, type MapVetoAction, type MapVetoRole, type MapVetoState } from "./engine";
 import { appendMapVetoAction, createMapVetoSession, loadMapVetoSession } from "./repository";

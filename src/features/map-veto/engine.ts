@@ -1,4 +1,4 @@
-﻿export const VALORANT_MAPS = ["Lotus", "Ascent", "Bind", "Haven", "Split", "Breeze", "Sunset", "Abyss"] as const;
+export const VALORANT_MAPS = ["Lotus", "Ascent", "Bind", "Haven", "Split", "Breeze", "Sunset", "Abyss"] as const;
 export type MapVetoPhase = "team_a_ban" | "team_b_ban" | "team_a_pick" | "team_b_pick" | "completed";
 export type MapVetoAction = { type: "ban" | "pick"; mapId: string };
 export type MapVetoRole = "admin" | "captain_a" | "captain_b" | "caster" | "viewer";

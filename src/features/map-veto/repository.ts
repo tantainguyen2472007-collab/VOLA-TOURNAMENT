@@ -1,4 +1,4 @@
-﻿import { supabase } from "../../lib/supabase";
+import { supabase } from "../../lib/supabase";
 import type { MapVetoAction, MapVetoState } from "./engine";
 export async function loadMapVetoSession(roomId: string) { const { data, error } = await supabase.from("draft_sessions").select("*").eq("room_id", roomId).eq("mode", "valorant_map_veto").single(); if (error) throw error; return data as { id: string; room_id: string; state: MapVetoState; version: number }; }
 export async function createMapVetoSession(roomId: string, state: MapVetoState) { const { data, error } = await supabase.from("draft_sessions").insert({ room_id: roomId, mode: "valorant_map_veto", format: "BO3", state, turn_deadline: new Date(Date.parse(state.turnStartedAt) + state.turnDuration * 1000).toISOString() }).select().single(); if (error) throw error; return data; }
