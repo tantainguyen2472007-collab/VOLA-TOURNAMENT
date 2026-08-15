@@ -29,3 +29,23 @@ end;
 $$;
 revoke execute on function public.apply_map_veto_action(uuid,jsonb,text,bigint) from public, anon;
 grant execute on function public.apply_map_veto_action(uuid,jsonb,text,bigint) to authenticated;
+create or replace function public.apply_map_veto_action(p_session_id uuid, p_action jsonb, p_actor_role text, p_expected_version bigint)
+returns public.draft_sessions language plpgsql security invoker as $$
+declare s public.draft_sessions; old_state jsonb; next_phase text; team text; map_id text; action_type text; new_maps jsonb; new_history jsonb;
+begin
+ select * into s from public.draft_sessions where id=p_session_id for update;
+ if not found then raise exception 'Map veto session not found'; end if;
+ if s.version<>p_expected_version then raise exception 'Stale map veto version'; end if;
+ old_state:=s.state; map_id:=p_action->>'mapId'; action_type:=p_action->>'type';
+ team:=case when old_state->>'phase' in ('team_a_ban','team_a_pick') then 'team_a' else 'team_b' end;
+ if p_actor_role<>'admin' and p_actor_role<>(case when team='team_a' then 'captain_a' else 'captain_b' end) then raise exception 'Role cannot act in current turn'; end if;
+ if (old_state->>'phase' like '%ban' and action_type<>'ban') or (old_state->>'phase' like '%pick' and action_type<>'pick') then raise exception 'Invalid action for current phase'; end if;
+ if not exists(select 1 from jsonb_array_elements(old_state->'maps') m where m->>'id'=map_id and m->>'status'='available') then raise exception 'Map unavailable'; end if;
+ next_phase:=case old_state->>'phase' when 'team_a_ban' then 'team_b_ban' when 'team_b_ban' then 'team_a_pick' when 'team_a_pick' then 'team_b_pick' else 'completed' end;
+ select jsonb_agg(case when m->>'id'=map_id then jsonb_set(jsonb_set(m,'{status}',to_jsonb(case when action_type='ban' then 'banned' else 'picked' end)),'{by}',to_jsonb(team)) else m end) into new_maps from jsonb_array_elements(old_state->'maps') m;
+ if next_phase='completed' then select jsonb_agg(case when m->>'status'='available' then jsonb_set(m,'{status}','"decider"') else m end) into new_maps from jsonb_array_elements(new_maps) m; end if;
+ new_history:=coalesce(old_state->'history','[]'::jsonb) || jsonb_build_array(jsonb_build_object('type',action_type,'mapId',map_id,'team',team,'at',now()));
+ update public.draft_sessions set state=jsonb_set(jsonb_set(jsonb_set(jsonb_set(old_state,'{maps}',new_maps),'{history}',new_history),'{phase}',to_jsonb(next_phase)),'{status}',to_jsonb(case when next_phase='completed' then 'completed' else 'active' end)),version=version+1,turn_deadline=case when next_phase='completed' then null else now()+interval '30 seconds' end where id=p_session_id returning * into s;
+ insert into public.draft_actions(session_id,sequence_no,actor_id,actor_role,action) values(p_session_id,s.version,(select auth.uid()),p_actor_role,p_action);
+ return s;
+end; $$;
