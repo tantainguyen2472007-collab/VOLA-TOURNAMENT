@@ -1,6 +1,7 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LayoutDashboard, Users, Shield, Trophy, LayoutTemplate, Swords, Crown, LogOut } from "lucide-react";
 import { cn } from "../lib/utils";
+import { useAuth } from "../hooks/useAuth";
 
 const navItems = [
   { icon: LayoutDashboard, label: "DASHBOARD", href: "/" },
@@ -8,12 +9,19 @@ const navItems = [
   { icon: Shield, label: "VAI TRÒ", href: "/roles" },
   { icon: Trophy, label: "GIẢI ĐẤU", href: "/tournaments" },
   { icon: LayoutTemplate, label: "BRACKET", href: "/bracket" },
-  { icon: Swords, label: "BAN/PICK", href: "/draft" },
+  { icon: Swords, label: "PHÒNG DRAFT", href: "/lobby" },
   { icon: Crown, label: "PREMIER LEAGUE", href: "/premier" },
 ];
 
 export function Sidebar() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { profile, signOut } = useAuth();
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate("/login");
+  };
 
   return (
     <aside className="w-64 bg-[#111111] border-r border-[#222] min-h-screen flex flex-col justify-between py-6">
@@ -48,10 +56,19 @@ export function Sidebar() {
         </nav>
       </div>
 
-      <div className="px-6">
-        <button className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm font-medium">
+      <div className="px-6 space-y-3">
+        {profile && (
+          <div className="text-sm">
+            <p className="text-white font-medium truncate">{profile.display_name}</p>
+            <p className="text-gray-500 text-xs">Đã đăng nhập</p>
+          </div>
+        )}
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm font-medium"
+        >
           <LogOut className="w-4 h-4" />
-          VỀ TRANG CHÍNH
+          ĐĂNG XUẤT
         </button>
       </div>
     </aside>
