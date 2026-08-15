@@ -75,9 +75,18 @@ export function useDraftRoom(roomId: string | undefined) {
       if (slotData) {
         const mapped = (slotData as DbDraftSlot[]).map(dbSlotToState);
         const ordered = [...mapped].sort((a, b) => TURN_ORDER.findIndex((t) => t.teamId === a.teamId && t.playerIndex === a.playerIndex) - TURN_ORDER.findIndex((t) => t.teamId === b.teamId && t.playerIndex === b.playerIndex));
-        setSlots(ordered);
-        const pickingIdx = mapped.findIndex((s) => s.status === "picking");
-        setCurrentTurnIndex(pickingIdx >= 0 ? pickingIdx : ordered.length);
+        const seenAgents = new Set<string>();
+        const normalized = ordered.map((slot) => {
+          if (!slot.agent || !seenAgents.has(slot.agent.id)) {
+            if (slot.agent) seenAgents.add(slot.agent.id);
+            return slot;
+          }
+          supabase.from("draft_slots").update({ status: "waiting", agent_id: null, agent_name: null, agent_role: null, agent_image: null, locked_at: null }).eq("id", slot.id).then(() => {});
+          return { ...slot, status: "waiting" as const, agent: null };
+        });
+        setSlots(normalized);
+        const pickingIdx = normalized.findIndex((s) => s.status === "picking");
+        setCurrentTurnIndex(pickingIdx >= 0 ? pickingIdx : normalized.length);
       }
 
       // Check my role
@@ -236,9 +245,10 @@ export function useDraftRoom(roomId: string | undefined) {
     let spinCount = 0;
     const interval = setInterval(() => {
       spinCount++;
-      const available = VALORANT_AGENTS.filter(
-        (a) => slot.selectedRole === "Any" || a.role === slot.selectedRole
-      );
+      const assignedAgentIds = slots
+        .filter((candidate) => candidate.id !== slot.id && candidate.agent)
+        .map((candidate) => candidate.agent!.id);
+      const available = getAvailableAgents(slot.selectedRole, assignedAgentIds);
       const randomAgent = available[Math.floor(Math.random() * available.length)];
 
       setSlots((prev) =>
