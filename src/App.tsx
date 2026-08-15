@@ -11,6 +11,9 @@ import { LiveMatch } from "./pages/LiveMatch";
 import { Bracket } from "./pages/Bracket";
 import { Tournaments } from "./pages/Tournaments";
 import { CreateTournament } from "./pages/CreateTournament";
+import { MapVetoRoom } from "./pages/MapVetoRoom";
+import { MapVetoOverlayPage } from "./pages/overlay/MapVetoOverlayPage";
+import { ScoreboardOverlayPage } from "./pages/overlay/ScoreboardOverlayPage";
 
 export default function App() {
   const auth = useAuthProvider();
@@ -19,7 +22,8 @@ export default function App() {
     <AuthContext.Provider value={auth}>
       <BrowserRouter>
         <Routes>
-          {/* Public */}
+          <Route path="/overlay/map-veto/:roomId" element={<MapVetoOverlayPage />} />
+          <Route path="/overlay/scoreboard/:roomId" element={<ScoreboardOverlayPage />} />
           <Route path="/login" element={<Login />} />
 
           {/* Protected with sidebar layout */}
@@ -35,6 +39,7 @@ export default function App() {
             <Route path="lobby" element={<DraftLobby />} />
             <Route path="draft" element={<DraftRoom />} />
             <Route path="draft/:roomId" element={<DraftRoom />} />
+            <Route path="map-veto/:roomId" element={<MapVetoRoom />} />
             <Route path="bracket" element={<Bracket />} />
             <Route path="tournaments" element={<Tournaments />} />
             <Route path="tournaments/new" element={<CreateTournament />} />
