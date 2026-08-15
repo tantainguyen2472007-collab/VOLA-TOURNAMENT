@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { RefreshCcw, Play, Timer, Map as MapIcon, Dices } from "lucide-react";
-import { VALORANT_AGENTS } from "../data/valorant";
+import { VALORANT_AGENTS, VALORANT_MAPS } from "../data/valorant";
 import { cn } from "../lib/utils";
 import { useDraftRoom, type DraftSlotState } from "../hooks/useDraftRoom";
 
@@ -19,6 +19,11 @@ export function DraftRoom() {
     handleRoleSelect,
     handleSpin,
     handleRandomMap,
+    handleMapVeto,
+    mapCanAct,
+    bannedMaps,
+    pickedMaps,
+    mapVetoPhase,
     handleReset,
     loading,
   } = useDraftRoom(roomId);
@@ -181,6 +186,25 @@ export function DraftRoom() {
               <Play className="w-5 h-5 fill-current" />
               2. BẮT ĐẦU QUAY RANDOM
             </button>
+          </div>
+
+          {/* Map veto */}
+          <div className="bg-[#111] border border-[#222] rounded-xl p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-bold text-gray-300">3. BAN / PICK MAP — BO3</h3>
+              <span className="text-xs text-yellow-500 uppercase font-bold">{mapVetoPhase.replace("_", " ")}</span>
+            </div>
+            <div className="grid grid-cols-4 gap-2">
+              {VALORANT_MAPS.map((map) => {
+                const status = bannedMaps.includes(map) ? "BAN" : pickedMaps.includes(map) ? "PICK" : (bannedMaps.length + pickedMaps.length >= 4 ? "DECIDER" : "CÒN LẠI");
+                const disabled = status !== "CÒN LẠI" || !mapCanAct;
+                return (
+                  <button key={map} disabled={disabled} onClick={() => handleMapVeto(map)} className={cn("rounded border px-2 py-2 text-xs font-bold transition-colors", status === "BAN" ? "border-red-500/50 text-red-400 bg-red-500/10" : status === "PICK" ? "border-green-500/50 text-green-400 bg-green-500/10" : status === "DECIDER" ? "border-cyan-500/50 text-cyan-400 bg-cyan-500/10" : "border-[#333] text-gray-300 hover:border-yellow-500", disabled && "opacity-50 cursor-not-allowed")}>
+                    {map}<span className="block text-[9px] mt-1 opacity-70">{status}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Agent Grid */}

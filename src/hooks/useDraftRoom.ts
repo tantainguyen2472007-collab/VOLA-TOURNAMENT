@@ -3,6 +3,7 @@ import { supabase } from "../lib/supabase";
 import { createDraftChannel, broadcastAction } from "../lib/realtime";
 import { useAuth } from "./useAuth";
 import { VALORANT_AGENTS, VALORANT_MAPS } from "../data/valorant";
+import { TURN_ORDER, getAvailableAgents } from "../features/draftRules";
 import type { RealtimeChannel } from "@supabase/supabase-js";
 import type { Agent, DbDraftSlot, DraftAction, RoomRole, Room } from "../types";
 
@@ -39,6 +40,9 @@ export function useDraftRoom(roomId: string | undefined) {
   const [slots, setSlots] = useState<DraftSlotState[]>([]);
   const [currentTurnIndex, setCurrentTurnIndex] = useState(0);
   const [selectedMap, setSelectedMap] = useState<string | null>(null);
+  const [bannedMaps, setBannedMaps] = useState<string[]>([]);
+  const [pickedMaps, setPickedMaps] = useState<string[]>([]);
+  const [mapVetoPhase, setMapVetoPhase] = useState<"ban_a" | "ban_b" | "pick_a" | "pick_b">("ban_a");
   const [isSpinning, setIsSpinning] = useState(false);
   const [isSpinningMap, setIsSpinningMap] = useState(false);
   const [myRole, setMyRole] = useState<RoomRole>("viewer");
@@ -70,9 +74,10 @@ export function useDraftRoom(roomId: string | undefined) {
 
       if (slotData) {
         const mapped = (slotData as DbDraftSlot[]).map(dbSlotToState);
-        setSlots(mapped);
+        const ordered = [...mapped].sort((a, b) => TURN_ORDER.findIndex((t) => t.teamId === a.teamId && t.playerIndex === a.playerIndex) - TURN_ORDER.findIndex((t) => t.teamId === b.teamId && t.playerIndex === b.playerIndex));
+        setSlots(ordered);
         const pickingIdx = mapped.findIndex((s) => s.status === "picking");
-        setCurrentTurnIndex(pickingIdx >= 0 ? pickingIdx : mapped.length);
+        setCurrentTurnIndex(pickingIdx >= 0 ? pickingIdx : ordered.length);
       }
 
       // Check my role
@@ -125,8 +130,10 @@ export function useDraftRoom(roomId: string | undefined) {
           })
         );
         setCurrentTurnIndex(action.slotIndex + 1);
-        // Persist to DB
         if (roomId) {
+          const lockedSlot = slots[action.slotIndex];
+          const nextSlot = slots[action.slotIndex + 1];
+          if (!lockedSlot) break;
           supabase
             .from("draft_slots")
             .update({
@@ -138,18 +145,16 @@ export function useDraftRoom(roomId: string | undefined) {
               locked_at: new Date().toISOString(),
             })
             .eq("room_id", roomId)
-            .eq("team_id", action.slotIndex < 5 ? "team_a" : "team_b")
-            .eq("player_index", action.slotIndex % 5)
+            .eq("team_id", lockedSlot.teamId)
+            .eq("player_index", lockedSlot.playerIndex)
             .then(() => {
-              // Set next slot to picking
-              if (action.slotIndex < 9) {
-                const nextTeam = action.slotIndex + 1 < 5 ? "team_a" : "team_b";
+              if (nextSlot) {
                 supabase
                   .from("draft_slots")
                   .update({ status: "picking" })
                   .eq("room_id", roomId)
-                  .eq("team_id", nextTeam)
-                  .eq("player_index", (action.slotIndex + 1) % 5)
+                  .eq("team_id", nextSlot.teamId)
+                  .eq("player_index", nextSlot.playerIndex)
                   .then(() => {});
               }
             });
@@ -158,6 +163,13 @@ export function useDraftRoom(roomId: string | undefined) {
 
       case "RANDOM_MAP":
         setSelectedMap(action.map);
+        setIsSpinningMap(false);
+        break;
+
+      case "MAP_VETO":
+        if (action.phase.startsWith("ban")) setBannedMaps((prev) => [...prev, action.map]);
+        else setPickedMaps((prev) => [...prev, action.map]);
+        setMapVetoPhase(action.phase === "ban_a" ? "ban_b" : action.phase === "ban_b" ? "pick_a" : action.phase === "pick_a" ? "pick_b" : "pick_b");
         setIsSpinningMap(false);
         break;
 
@@ -172,9 +184,12 @@ export function useDraftRoom(roomId: string | undefined) {
         );
         setCurrentTurnIndex(0);
         setSelectedMap(null);
+        setBannedMaps([]);
+        setPickedMaps([]);
+        setMapVetoPhase("ban_a");
         break;
     }
-  }, [roomId]);
+  }, [roomId, slots]);
 
   // Subscribe to realtime channel
   useEffect(() => {
@@ -246,6 +261,15 @@ export function useDraftRoom(roomId: string | undefined) {
     }, 100);
   }, [slots, currentTurnIndex, isSpinning, broadcast]);
 
+  const mapCanAct = myRole === "admin" ||
+    (mapVetoPhase.endsWith("_a") && myRole === "captain_a") ||
+    (mapVetoPhase.endsWith("_b") && myRole === "captain_b");
+
+  const handleMapVeto = useCallback((map: string) => {
+    if (isSpinningMap || !mapCanAct || bannedMaps.includes(map) || pickedMaps.includes(map)) return;
+    broadcast({ type: "MAP_VETO", phase: mapVetoPhase, map });
+  }, [isSpinningMap, mapCanAct, bannedMaps, pickedMaps, mapVetoPhase, broadcast]);
+
   const handleRandomMap = useCallback(() => {
     if (isSpinningMap) return;
     setIsSpinningMap(true);
@@ -263,34 +287,18 @@ export function useDraftRoom(roomId: string | undefined) {
 
   const handleReset = useCallback(() => {
     broadcast({ type: "RESET" });
-    // Reset in DB
     if (roomId) {
       supabase
         .from("draft_slots")
-        .update({
-          status: "waiting",
-          selected_role: null,
-          agent_id: null,
-          agent_name: null,
-          agent_image: null,
-          agent_role: null,
-          locked_at: null,
-        })
+        .update({ status: "waiting", selected_role: null, agent_id: null, agent_name: null, agent_image: null, agent_role: null, locked_at: null })
         .eq("room_id", roomId)
         .then(() => {
-          supabase
-            .from("draft_slots")
-            .update({ status: "picking" })
-            .eq("room_id", roomId)
-            .eq("team_id", "team_a")
-            .eq("player_index", 0)
-            .then(() => {});
+          supabase.from("draft_slots").update({ status: "picking" }).eq("room_id", roomId).eq("team_id", "team_a").eq("player_index", 0).then(() => {});
         });
     }
   }, [roomId, broadcast]);
 
-  const canAct =
-    myRole === "admin" ||
+  const canAct = myRole === "admin" ||
     (myRole === "captain_a" && slots[currentTurnIndex]?.teamId === "team_a") ||
     (myRole === "captain_b" && slots[currentTurnIndex]?.teamId === "team_b");
 
@@ -306,6 +314,11 @@ export function useDraftRoom(roomId: string | undefined) {
     handleRoleSelect,
     handleSpin,
     handleRandomMap,
+    handleMapVeto,
+    mapCanAct,
+    bannedMaps,
+    pickedMaps,
+    mapVetoPhase,
     handleReset,
     loading,
   };

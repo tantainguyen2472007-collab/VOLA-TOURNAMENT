@@ -101,4 +101,5 @@ export type DraftAction =
   | { type: "LOCK"; slotIndex: number; agent: Agent }
   | { type: "NEXT_TURN"; nextIndex: number }
   | { type: "RANDOM_MAP"; map: string }
+  | { type: "MAP_VETO"; phase: "ban_a" | "ban_b" | "pick_a" | "pick_b"; map: string }
   | { type: "RESET" };
