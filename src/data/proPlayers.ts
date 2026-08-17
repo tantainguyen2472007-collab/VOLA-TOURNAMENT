@@ -24,11 +24,11 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       outerLines: { show: false, length: 0, thickness: 0, offset: 0 }
     },
     mouse: {
-      dpi: 800,
-      sensitivity: 0.3,
-      eDpi: 240,
-      cm360: 54.3,
-      pollingRate: "8000 Hz",
+      dpi: 1600,
+      sensitivity: 0.22,
+      eDpi: 352,
+      cm360: 37.0,
+      pollingRate: "1000 Hz",
       hz: "Raw Input Buffer On",
       mouseGrip: "Claw Grip"
     },
@@ -62,24 +62,27 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "Masters Madrid 2024 Champion",
       "Masters Reykjavik 2021 Undefeated Champion",
       "Most Influential Valorant Player in History"
-    ]
+    ],
+    verificationStatus: "verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net / specs.gg"
   },
   {
     id: "aspas",
     name: "aspas",
     realName: "Erick Santos",
-    team: "Leviatán",
+    team: "MIBR",
     role: "Duelist",
     region: "Americas",
     country: "Brazil",
     countryFlag: "🇧🇷",
     avatar: "https://ui-avatars.com/api/?name=aspas&background=00a1ff&color=fff&size=400&font-size=0.33&bold=true",
     status: "Champion MVP",
-    crosshairCode: "0;P;c;5;o;1;d;1;z;3;f;0;0b;0;1b;0",
+    crosshairCode: "0;P;h;0;0l;4;0o;0;0a;1;0f;0;1b;0",
     crosshairConfig: {
-      color: "#00ffff",
-      outlines: true,
-      centerDot: true,
+      color: "#ffffff",
+      outlines: false,
+      centerDot: false,
       innerLines: { show: false, length: 0, thickness: 0, offset: 0 },
       outerLines: { show: false, length: 0, thickness: 0, offset: 0 }
     },
@@ -122,13 +125,16 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "VALORANT Champions 2022 Champion",
       "Americas Stage 2 2024 Champion",
       "VCT All-Time Highest ACS Record Holder"
-    ]
+    ],
+    verificationStatus: "verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net / specs.gg"
   },
   {
     id: "zekken",
     name: "zekken",
     realName: "Zachary Patrone",
-    team: "Sentinels",
+    team: "MIBR",
     role: "Duelist",
     region: "Americas",
     country: "United States",
@@ -182,7 +188,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "Masters Madrid 2024 Champion & Finals MVP",
       "Americas Kickoff 2024 Champion",
       "Masters Madrid Grand Finals 101 Kills (Tied World Record)"
-    ]
+    ],
+    verificationStatus: "verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net / specs.gg"
   },
   {
     id: "johnqt",
@@ -241,7 +250,9 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
     achievements: [
       "Masters Madrid 2024 Champion IGL",
       "VCT Americas Kickoff 2024 Champion"
-    ]
+    ],
+    verificationStatus: "unverified" ,
+    lastVerifiedDate: "2026-08-17"
   },
   {
     id: "demon1",
@@ -301,7 +312,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "VALORANT Champions 2023 Champion & Tournament MVP",
       "Highest VCT Headshot Percentage in History (41.2%)",
       "Masters Tokyo 2023 Grand Finalist"
-    ]
+    ],
+    verificationStatus: "verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net / specs.gg"
   },
   {
     id: "cryocells",
@@ -359,7 +373,9 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
     achievements: [
       "VCT Americas Stage 1 2024 Champion",
       "Red Bull Home Ground #3 Champion"
-    ]
+    ],
+    verificationStatus: "unverified" ,
+    lastVerifiedDate: "2026-08-17"
   },
   {
     id: "asuna",
@@ -410,7 +426,9 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
     achievements: [
       "VCT Americas Stage 1 2024 Champion",
       "First Strike North America Champion"
-    ]
+    ],
+    verificationStatus: "unverified" ,
+    lastVerifiedDate: "2026-08-17"
   },
   {
     id: "less",
@@ -461,7 +479,9 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
     achievements: [
       "VALORANT Champions 2022 World Champion",
       "VCT Americas 2023 Champion"
-    ]
+    ],
+    verificationStatus: "unverified" ,
+    lastVerifiedDate: "2026-08-17"
   },
 
   // ==========================================
@@ -525,7 +545,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "VCT Masters Shanghai 2024 Champion",
       "VCT Pacific Stage 2 2024 Champion",
       "VCT Masters Madrid 2024 Grand Finalist"
-    ]
+    ],
+    verificationStatus: "partially_verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net (partial)"
   },
   {
     id: "karon",
@@ -585,7 +608,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "VCT Masters Shanghai 2024 Champion & Finals MVP",
       "VCT Pacific Rookie of the Year 2024",
       "VCT Pacific Stage 2 Champion"
-    ]
+    ],
+    verificationStatus: "partially_verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net (partial)"
   },
   {
     id: "f0rsaken",
@@ -645,7 +671,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "VALORANT Champions 2023 Runner-Up",
       "VCT Pacific 2023 Champion & Stage 1 2024 Champion",
       "Most Versatile Player in VCT History (Played 15+ Agents)"
-    ]
+    ],
+    verificationStatus: "partially_verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net (partial)"
   },
   {
     id: "something",
@@ -705,7 +734,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "VALORANT Champions 2023 Runner-Up",
       "VCT Pacific 2023 Finals MVP & Champion",
       "Fastest Reaction Time & Highest Sens in VCT Top-Tier"
-    ]
+    ],
+    verificationStatus: "partially_verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net (partial)"
   },
   {
     id: "jinggg",
@@ -756,7 +788,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
     achievements: [
       "VALORANT Champions 2023 Runner-Up",
       "World's #1 Raze Satchel Movement Demon"
-    ]
+    ],
+    verificationStatus: "partially_verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net (partial)"
   },
   {
     id: "mako",
@@ -807,7 +842,9 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
     achievements: [
       "Top 3 VCT Champions 2022",
       "All-Time Highest Rating Controller in Asia"
-    ]
+    ],
+    verificationStatus: "unverified" ,
+    lastVerifiedDate: "2026-08-17"
   },
   {
     id: "primmie",
@@ -858,7 +895,9 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
     achievements: [
       "APAC Aim Demon #1 Ranked Leader",
       "VCT Pacific Stage 2 Highest ACS Debutant"
-    ]
+    ],
+    verificationStatus: "unverified" ,
+    lastVerifiedDate: "2026-08-17"
   },
 
   // ==========================================
@@ -868,7 +907,7 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
     id: "chronicle",
     name: "Chronicle",
     realName: "Timofey Khromov",
-    team: "Fnatic",
+    team: "Team Vitality",
     role: "Flex",
     region: "EMEA",
     country: "Russia",
@@ -922,7 +961,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "Only Player in History with 3 International VCT Trophies (Masters Berlin, LOCK//IN, Masters Tokyo)",
       "VCT Masters Tokyo 2023 Champion",
       "VCT LOCK//IN Sao Paulo 2023 Champion"
-    ]
+    ],
+    verificationStatus: "verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net / specs.gg"
   },
   {
     id: "boaster",
@@ -982,7 +1024,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "VCT Masters Tokyo 2023 Champion IGL",
       "VCT LOCK//IN Sao Paulo 2023 Champion IGL",
       "VCT EMEA Stage 2 2024 Champion"
-    ]
+    ],
+    verificationStatus: "partially_verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net (partial)"
   },
   {
     id: "wo0t",
@@ -1042,7 +1087,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "VALORANT Champions 2024 Seoul Top 2 Finalist",
       "VCT Masters Shanghai 2024 Grand Finalist & Breakout Phenom",
       "VCT EMEA Stage 1 2024 Finalist"
-    ]
+    ],
+    verificationStatus: "partially_verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net (partial)"
   },
   {
     id: "derke",
@@ -1102,7 +1150,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "VCT Masters Tokyo 2023 Champion",
       "VCT LOCK//IN Sao Paulo 2023 Champion",
       "All-Time Highest First Kills in VCT EMEA History"
-    ]
+    ],
+    verificationStatus: "verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net / specs.gg"
   },
   {
     id: "benjyfishy",
@@ -1154,7 +1205,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "VALORANT Champions 2024 Seoul Runner-Up",
       "VCT Masters Shanghai 2024 Grand Finalist",
       "Best Cypher Anchor in the World"
-    ]
+    ],
+    verificationStatus: "partially_verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net (partial)"
   },
   {
     id: "alfajer",
@@ -1205,7 +1259,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
     achievements: [
       "VCT Masters Tokyo 2023 Champion & MVP Contender",
       "VCT LOCK//IN Sao Paulo 2023 Champion"
-    ]
+    ],
+    verificationStatus: "partially_verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net (partial)"
   },
   {
     id: "nats",
@@ -1257,7 +1314,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "VCT Masters Berlin 2021 Champion & Tournament MVP",
       "Champions 2021 Grand Finalist",
       "The Original Viper & Cypher Lurk God"
-    ]
+    ],
+    verificationStatus: "partially_verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net (partial)"
   },
   {
     id: "scream",
@@ -1309,7 +1369,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "The 'Headshot Machine' Esports Legend",
       "VCT EMEA 2023 Stage 1 Champion",
       "VCT Masters Reykjavik 2021 Top 3"
-    ]
+    ],
+    verificationStatus: "partially_verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net (partial)"
   },
 
   // ==========================================
@@ -1335,11 +1398,11 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       outerLines: { show: false, length: 0, thickness: 0, offset: 0 }
     },
     mouse: {
-      dpi: 800,
-      sensitivity: 0.28,
-      eDpi: 224,
-      cm360: 58.2,
-      pollingRate: "8000 Hz",
+      dpi: 1600,
+      sensitivity: 0.1,
+      eDpi: 160,
+      cm360: 81.4,
+      pollingRate: "4000 Hz",
       hz: "Raw Input Buffer On",
       mouseGrip: "Claw Grip"
     },
@@ -1373,7 +1436,10 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "VALORANT Champions 2024 Seoul World Champion & Finals MVP",
       "All-Time Record for Most Kills in a Best-of-5 Grand Finals (111 Kills)",
       "VCT China Stage 1 & Stage 2 2024 Champion"
-    ]
+    ],
+    verificationStatus: "verified" ,
+    lastVerifiedDate: "2026-08-17",
+    verificationSource: "prosettings.net / specs.gg"
   },
   {
     id: "chichoo",
@@ -1433,7 +1499,9 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
       "VALORANT Champions 2024 Seoul World Champion",
       "VCT Champions 2024 Clutch King (Won 11 Clutches in Playoffs)",
       "VCT China Stage 2 2024 Champion"
-    ]
+    ],
+    verificationStatus: "unverified" ,
+    lastVerifiedDate: "2026-08-17"
   },
   {
     id: "nobody",
@@ -1484,7 +1552,9 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
     achievements: [
       "VALORANT Champions 2024 Seoul World Champion IGL",
       "VCT China 2024 #1 Rated Initiator (Fade/Sova)"
-    ]
+    ],
+    verificationStatus: "unverified" ,
+    lastVerifiedDate: "2026-08-17"
   },
   {
     id: "smoggy",
@@ -1535,6 +1605,8 @@ export const PRO_SETTINGS_LIST: ProPlayerSetting[] = [
     achievements: [
       "VALORANT Champions 2024 Seoul World Champion",
       "VCT China Stage 1 & Stage 2 Champion"
-    ]
+    ],
+    verificationStatus: "unverified" ,
+    lastVerifiedDate: "2026-08-17"
   }
 ];

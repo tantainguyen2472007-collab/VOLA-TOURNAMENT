@@ -23,7 +23,8 @@ import {
   ChevronLeft,
   Share2,
   Info,
-  Maximize2
+  Maximize2,
+  AlertTriangle
 } from "lucide-react";
 import { MAP_LINEUPS_DATA, AbilityLineup, CUSTOM_GAME_COMMANDS } from "../data/mapLineups";
 import { InGameHUDVisualizer } from "../components/InGameHUDVisualizer";
@@ -468,12 +469,15 @@ export function MapLineups() {
 
                   {/* Content Area */}
                   <div className="p-5 flex-1 flex flex-col">
-                    <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2 mb-3 flex-wrap">
                       <span className={`px-2.5 py-0.5 rounded-lg text-[10px] font-bold border uppercase tracking-wider ${getSideColor(lineup.side)}`}>
                         {lineup.side}
                       </span>
                       <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-medium bg-white/5 text-gray-400 border border-white/5">
                         Độ khó: <strong className={lineup.difficulty === "Dễ" ? "text-emerald-400" : lineup.difficulty === "Trung Bình" ? "text-amber-400" : "text-rose-400"}>{lineup.difficulty}</strong>
+                      </span>
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[10px] font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/30" title="Chưa test trong game hiện tại">
+                        <AlertTriangle className="w-3 h-3" /> Chưa xác minh in-game
                       </span>
                     </div>
 

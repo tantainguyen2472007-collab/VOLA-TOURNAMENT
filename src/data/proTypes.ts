@@ -72,6 +72,9 @@ export interface ProPlayerSetting {
     ultimate: string;
   };
   achievements: string[];
+  verificationStatus: "verified" | "partially_verified" | "unverified";
+  lastVerifiedDate: string;
+  verificationSource?: string;
 }
 
 export interface EloShapesData {
@@ -97,6 +100,7 @@ export interface GamingGearItem {
   priceVnd: number;
   priceFormatted: string;
   image: string;
+  imageCredit?: string;
   specs: string[];
   eloshapes?: EloShapesData;
   recommendedFor: {
@@ -108,4 +112,7 @@ export interface GamingGearItem {
   highlightReason: string;
   proUsers: string[];
   rating: number;
+  ratingLabel: string;
+  verificationStatus: "verified" | "partially_verified" | "unverified";
+  lastVerifiedDate: string;
 }

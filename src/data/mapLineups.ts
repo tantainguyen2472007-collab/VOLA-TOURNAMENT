@@ -48,6 +48,11 @@ export interface AbilityLineup {
   };
 }
 
+
+// ponytail: lineup verification status — all lineups are text-described and need in-game testing
+// Upgrade path: add per-lineup verificationStatus field when in-game screenshot system is built
+export const LINEUP_VERIFICATION_NOTE = "Các lineup được mô tả từ kiến thức cộng đồng. Vị trí đứng/điểm căn HUD cần xác minh trong game thực tế." as const;
+
 export const MAP_LINEUPS_DATA: AbilityLineup[] = [
   // ==========================================
   // ASCENT
@@ -72,7 +77,7 @@ export const MAP_LINEUPS_DATA: AbilityLineup[] = [
     aimMarker: "Căn chóp góc trái biểu tượng Drone (C) trùng với đỉnh nhọn mái nhà vòm A Site",
     powerBounce: "1 Vạch Lực (1 Charge Bar) • 0 Nảy (0 Bounce)",
     landingZone: "Mái kính góc cao A Site, lộ tầm nhìn toàn bộ vị trí thủ",
-    proPlayer: "Sentinels TenZ / Fnatic Chronicle",
+    proPlayer: "TenZ / Chronicle",
     tags: ["A Execute", "Wallhack", "Pro Meta"],
     steps: [
       {
@@ -235,7 +240,7 @@ export const MAP_LINEUPS_DATA: AbilityLineup[] = [
     aimMarker: "Dây 1: Cắt chéo chân tường B Main lên thùng. Dây 2: Nối giữa cột trụ và mép cầu thang",
     powerBounce: "Cài đặt trước thời gian mở rào",
     landingZone: "Khóa chặt B Main, One-way Cage nhìn thấy chân địch khi đi qua",
-    proPlayer: "PRX d4v41 / Gen.G Munchkin",
+    proPlayer: "d4v41 / Munchkin",
     tags: ["God Setup", "Anti-Rush", "One-Way"],
     steps: [
       {
@@ -310,7 +315,7 @@ export const MAP_LINEUPS_DATA: AbilityLineup[] = [
     aimMarker: "Cúi nhìn xuống góc sàn nhà kho Boathouse",
     powerBounce: "Kích hoạt phím X (Chiêu cuối)",
     landingZone: "Phủ sóng 100% B Site, B Main, B Stairs và một phần Mid Market",
-    proPlayer: "Fnatic Boaster",
+    proPlayer: "Boaster",
     tags: ["Lockdown", "Site Retake", "Safe Spot"],
     steps: [
       {
@@ -389,7 +394,7 @@ export const MAP_LINEUPS_DATA: AbilityLineup[] = [
     aimMarker: "Căn góc biểu tượng chuột trái trên HUD trùng với đỉnh tháp anten vệ tinh A",
     powerBounce: "Đứng yên bắn chuột trái (Normal Shot)",
     landingZone: "Rơi thẳng xuống tâm bom A Default",
-    proPlayer: "Sentinels Zellsis",
+    proPlayer: "Zellsis",
     tags: ["Post-Plant", "Guaranteed Win", "Molly Lineup"],
     steps: [
       {
@@ -469,7 +474,7 @@ export const MAP_LINEUPS_DATA: AbilityLineup[] = [
     aimMarker: "Căn chóp tam giác của thanh máu (HP Bar) vào góc mái nhà tôn B Long",
     powerBounce: "Đứng yên bắn chuột trái",
     landingZone: "Nổ trúng góc thùng B Site Default",
-    proPlayer: "Fnatic Boaster",
+    proPlayer: "Boaster",
     tags: ["Post-Plant", "B Site", "Clutch Round"],
     steps: [
       {
@@ -549,7 +554,7 @@ export const MAP_LINEUPS_DATA: AbilityLineup[] = [
     aimMarker: "Ngắm đỉnh ngọn cây tre cao nhất vượt qua mái đình A Long",
     powerBounce: "Ném thường chuột trái (Normal Throw)",
     landingZone: "Cắm trên đỉnh mái đình A Site, phủ bán kính quét cực đại",
-    proPlayer: "Fnatic Chronicle",
+    proPlayer: "Chronicle",
     tags: ["Suppress Knife", "A Execute", "Anti-OP"],
     steps: [
       {
@@ -629,7 +634,7 @@ export const MAP_LINEUPS_DATA: AbilityLineup[] = [
     aimMarker: "Căn mép biển hiệu B Main kéo ngang sang chân cột trụ bê tông",
     powerBounce: "Cài đặt đầu round đấu",
     landingZone: "Khóa chặt toàn bộ cửa vào B Main và B Boba",
-    proPlayer: "Sentinels johnqt",
+    proPlayer: "johnqt",
     tags: ["VCT Champion", "Unbreakable", "Meta Sentinel"],
     steps: [
       {
@@ -704,7 +709,7 @@ export const MAP_LINEUPS_DATA: AbilityLineup[] = [
     aimMarker: "Căn tâm ngắm vào góc gạch màu cam trên đỉnh tòa nhà Sunset",
     powerBounce: "Nhảy ném (Jump Throw) chuột trái",
     landingZone: "Phủ kín 100% diện tích thùng B Default",
-    proPlayer: "PRX something",
+    proPlayer: "something",
     tags: ["Mosh Pit", "Gekko Meta", "Post-Plant"],
     steps: [
       {
@@ -784,7 +789,7 @@ export const MAP_LINEUPS_DATA: AbilityLineup[] = [
     aimMarker: "Căn mép icon Prowler (C) vào khe nứt tảng đá cổ Lotus",
     powerBounce: "Đứng yên ném chuột trái",
     landingZone: "Đậu trên đỉnh tảng đá cao A Site, không góc chết",
-    proPlayer: "DRX Foxy9",
+    proPlayer: "Foxy9",
     tags: ["Fade Haunt", "Lotus Meta", "A Site Clear"],
     steps: [
       {
@@ -864,7 +869,7 @@ export const MAP_LINEUPS_DATA: AbilityLineup[] = [
     aimMarker: "Bắn tường độc xuyên qua 2 kim tự tháp A Pyramids",
     powerBounce: "Bắn tường E thẳng theo minimap",
     landingZone: "Cắt đôi A Site thành 2 nửa, che 100% tầm nhìn",
-    proPlayer: "Sentinels dapr / LOUD tuyz",
+    proPlayer: "dapr / tuyz",
     tags: ["Must Pick", "Breeze King", "Viper Meta"],
     steps: [
       {
@@ -944,7 +949,7 @@ export const MAP_LINEUPS_DATA: AbilityLineup[] = [
     aimMarker: "Tên 1: Căn mép cần cẩu màu cam. Tên 2: Căn góc biển báo tuyết",
     powerBounce: "Tên 1: 2 Vạch (1 Nảy) → Tên 2: 1 Vạch (0 Nảy)",
     landingZone: "Nổ dồn sát thương trúng góc đặt A Default",
-    proPlayer: "AverageJonas / Fnatic Chronicle",
+    proPlayer: "AverageJonas / Chronicle",
     tags: ["Icebox Lineup", "Instant Kill", "A Default"],
     steps: [
       {
@@ -1024,7 +1029,7 @@ export const MAP_LINEUPS_DATA: AbilityLineup[] = [
     aimMarker: "Đặt tâm bóng khói vào gờ bảng hiệu quảng cáo A Main",
     powerBounce: "Chuột phải đặt khói",
     landingZone: "Khói lơ lửng trên biển hiệu, hở chân địch khi chạy ra",
-    proPlayer: "DRX MaKo",
+    proPlayer: "MaKo",
     tags: ["One-Way Smoke", "Split Defense", "Free Kills"],
     steps: [
       {
@@ -1104,7 +1109,7 @@ export const MAP_LINEUPS_DATA: AbilityLineup[] = [
     aimMarker: "Căn góc icon Shock Dart (Q) chạm mép tinh thể phát sáng A Spire",
     powerBounce: "2 Vạch Lực • 0 Nảy",
     landingZone: "Đỉnh tháp tinh thể A Spire, phủ 100% tầm nhìn A Site",
-    proPlayer: "Sentinels TenZ / Gen.G t3xture",
+    proPlayer: "TenZ / t3xture",
     tags: ["Abyss Meta", "New Map", "Abyss God Lineup"],
     steps: [
       {
@@ -1180,7 +1185,7 @@ export const MAP_LINEUPS_DATA: AbilityLineup[] = [
     aimMarker: "Căn góc dưới thanh đạn súng trùng với đỉnh chóp đá treo Abyss",
     powerBounce: "Đứng yên bắn chuột trái",
     landingZone: "Nổ trúng tâm khu vực đặt bom A Default",
-    proPlayer: "Sentinels Zellsis",
+    proPlayer: "Zellsis",
     tags: ["Abyss Molly", "Post-Plant", "Clutch God"],
     steps: [
       {

@@ -27,10 +27,29 @@ import {
   RefreshCw,
   Award,
   X,
-  Scale
+  Scale,
+  ShieldCheck,
+  AlertTriangle,
+  Info
 } from "lucide-react";
 import { PRO_SETTINGS_LIST, GEAR_DATABASE, ProPlayerSetting, GamingGearItem } from "../data/proSettings";
 import { sound } from "../lib/sounds";
+
+// Verification badge component
+const VerificationBadge = ({ status, date, source }: { status: string; date: string; source?: string }) => {
+  const config = status === 'verified'
+    ? { icon: ShieldCheck, label: 'Verified', cls: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30' }
+    : status === 'partially_verified'
+    ? { icon: AlertTriangle, label: 'Xác minh một phần', cls: 'bg-amber-500/10 text-amber-300 border-amber-500/30' }
+    : { icon: Info, label: 'Chưa xác minh', cls: 'bg-gray-500/10 text-gray-400 border-gray-500/30' };
+  const Icon = config.icon;
+  return (
+    <span className={`inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full border font-semibold ${config.cls}`} title={`${config.label} — ${date}${source ? ` (${source})` : ''}`}>
+      <Icon className="w-3 h-3 shrink-0" />
+      {config.label}
+    </span>
+  );
+};
 
 export function ProSettings() {
   const [selectedPlayer, setSelectedPlayer] = useState<ProPlayerSetting>(PRO_SETTINGS_LIST[0]);
@@ -420,6 +439,7 @@ export function ProSettings() {
                             <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/10 text-gray-300 uppercase font-semibold shrink-0">
                               {player.role}
                             </span>
+                            <VerificationBadge status={player.verificationStatus} date={player.lastVerifiedDate} source={player.verificationSource} />
                           </div>
                           <p className="text-xs text-gray-400 truncate">
                             {player.realName} • <strong className="text-rose-400">{player.team}</strong> ({player.region})
@@ -459,6 +479,7 @@ export function ProSettings() {
                       <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 font-semibold">
                         {selectedPlayer.status}
                       </span>
+                      <VerificationBadge status={selectedPlayer.verificationStatus} date={selectedPlayer.lastVerifiedDate} source={selectedPlayer.verificationSource} />
                     </div>
                     <p className="text-sm text-gray-300 mt-1">
                       {selectedPlayer.realName} • Đội tuyển <strong className="text-rose-400">{selectedPlayer.team}</strong> ({selectedPlayer.region})
@@ -1152,10 +1173,15 @@ export function ProSettings() {
 
                     {/* Image Mockup & Title */}
                     <div className="h-36 rounded-xl bg-black/60 overflow-hidden border border-white/5 relative mb-3.5 group-hover:scale-[1.02] transition-transform">
-                      <img src={gear.image} alt={gear.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                      <img src={gear.image} alt={`${gear.name} — ${gear.imageCredit || 'Ảnh minh họa'}`} loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" onError={(e) => { (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(gear.brand)}&background=1a1a2e&color=666&size=400&font-size=0.2`; }} />
                       <div className="absolute bottom-2 left-2 bg-black/80 px-2 py-0.5 rounded text-[10px] text-gray-300 font-mono">
                         {gear.brand}
                       </div>
+                      {gear.imageCredit && (
+                        <div className="absolute top-2 right-2 bg-black/70 px-1.5 py-0.5 rounded text-[8px] text-gray-400">
+                          📷 {gear.imageCredit}
+                        </div>
+                      )}
                     </div>
 
                     <h4 className="text-base font-bold text-white mb-2 leading-snug">{gear.name}</h4>
@@ -1202,7 +1228,10 @@ export function ProSettings() {
                   <div className="pt-3 border-t border-white/5 flex flex-col gap-3">
                     <div className="flex items-center justify-between text-[11px] text-gray-400">
                       <span className="truncate">⭐ Pro dùng: <strong className="text-white">{gear.proUsers.slice(0, 2).join(", ")}</strong></span>
-                      <span className="font-mono text-amber-300 shrink-0 font-bold">★ {gear.rating}</span>
+                      <span className="font-mono text-amber-300 shrink-0 font-bold cursor-help" title={gear.ratingLabel || 'Điểm nội bộ ESP — không phải đánh giá khách quan'}>★ {gear.rating} <span className="text-[8px] text-gray-500 font-normal">({gear.ratingLabel || 'Nội bộ'})</span></span>
+                    </div>
+                    <div className="flex items-center justify-between text-[10px] text-gray-500 mt-1">
+                      <VerificationBadge status={gear.verificationStatus} date={gear.lastVerifiedDate} />
                     </div>
                     <button
                       onClick={(e) => {
