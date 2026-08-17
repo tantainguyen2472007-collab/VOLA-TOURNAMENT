@@ -8,8 +8,8 @@ import type { Room } from "../types";
 export function DraftLobby() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [teamA, setTeamA] = useState("DAMIT2K");
-  const [teamB, setTeamB] = useState("LAYLA2K4");
+  const [teamA, setTeamA] = useState("Team A");
+  const [teamB, setTeamB] = useState("Team B");
   const [roomName, setRoomName] = useState("");
   const [createdRoom, setCreatedRoom] = useState<Room | null>(null);
   const [loading, setLoading] = useState(false);

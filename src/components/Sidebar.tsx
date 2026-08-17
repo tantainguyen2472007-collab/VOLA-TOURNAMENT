@@ -1,16 +1,31 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Users, Shield, Trophy, LayoutTemplate, Swords, Crown, LogOut } from "lucide-react";
+import { 
+  LayoutDashboard, 
+  Palette, 
+  Crosshair, 
+  Target, 
+  Calculator, 
+  Award, 
+  Sparkles, 
+  Trophy, 
+  LayoutTemplate, 
+  Swords, 
+  LogOut 
+} from "lucide-react";
 import { cn } from "../lib/utils";
 import { useAuth } from "../hooks/useAuth";
 
 const navItems = [
   { icon: LayoutDashboard, label: "DASHBOARD", href: "/" },
-  { icon: Users, label: "NGƯỜI DÙNG", href: "/users" },
-  { icon: Shield, label: "VAI TRÒ", href: "/roles" },
+  { icon: Palette, label: "SKIN", href: "/skins" },
+  { icon: Crosshair, label: "PRO SETTINGS", href: "/pro-settings" },
+  { icon: Target, label: "GÓC KÊ & SETUPS", href: "/setups" },
+  { icon: Calculator, label: "KINH TẾ & BUY", href: "/economy" },
+  { icon: Award, label: "META TIER LIST", href: "/tierlist" },
+  { icon: Sparkles, label: "LINEUP ĐỘI HÌNH", href: "/lineup" },
   { icon: Trophy, label: "GIẢI ĐẤU", href: "/tournaments" },
   { icon: LayoutTemplate, label: "BRACKET", href: "/bracket" },
   { icon: Swords, label: "PHÒNG DRAFT", href: "/lobby" },
-  { icon: Crown, label: "PREMIER LEAGUE", href: "/premier" },
 ];
 
 export function Sidebar() {
@@ -24,16 +39,16 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="w-64 bg-[#111111] border-r border-[#222] min-h-screen flex flex-col justify-between py-6">
+    <aside className="w-64 bg-[#0a0a0a] border-r border-white/5 min-h-screen flex flex-col justify-between py-8">
       <div>
-        <div className="px-6 mb-8 flex items-center gap-2">
-          <div className="w-8 h-8 bg-yellow-500 rounded flex items-center justify-center font-bold text-black italic">
+        <div className="px-8 mb-10 flex items-center gap-3">
+          <div className="w-10 h-10 bg-white rounded flex items-center justify-center font-display text-2xl text-black">
             ESP
           </div>
-          <span className="font-bold text-lg text-white">TOURNAMENT</span>
+          <span className="font-display text-2xl text-white tracking-widest mt-1">TOURNAMENT</span>
         </div>
         
-        <nav className="flex flex-col gap-1 px-3">
+        <nav className="flex flex-col gap-2 px-4">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.href;
@@ -42,30 +57,30 @@ export function Sidebar() {
                 key={item.href}
                 to={item.href}
                 className={cn(
-                  "flex items-center gap-3 px-4 py-3 rounded-md text-sm font-medium transition-colors",
+                  "flex items-center gap-4 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300",
                   isActive 
-                    ? "bg-[#222] text-yellow-500" 
-                    : "text-gray-400 hover:text-gray-200 hover:bg-[#1A1A1A]"
+                    ? "bg-white/10 text-white" 
+                    : "text-white/40 hover:text-white/80 hover:bg-white/5"
                 )}
               >
-                <Icon className="w-4 h-4" />
-                {item.label}
+                <Icon className={cn("w-4 h-4", isActive ? "text-primary" : "")} />
+                <span className="tracking-wider text-xs">{item.label}</span>
               </Link>
             );
           })}
         </nav>
       </div>
 
-      <div className="px-6 space-y-3">
+      <div className="px-8 space-y-4">
         {profile && (
           <div className="text-sm">
             <p className="text-white font-medium truncate">{profile.display_name}</p>
-            <p className="text-gray-500 text-xs">Đã đăng nhập</p>
+            <p className="text-white/40 text-xs mt-1">Online</p>
           </div>
         )}
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm font-medium"
+          className="flex items-center gap-3 text-white/40 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest"
         >
           <LogOut className="w-4 h-4" />
           ĐĂNG XUẤT

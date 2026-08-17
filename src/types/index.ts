@@ -1,6 +1,25 @@
 export type Role = "Admin" | "Captain" | "Player" | "Viewer";
 
-export type Game = "Valorant" | "LoL" | "AOV";
+export type Game = "Valorant" | "LoL" | "CS2" | "AOV";
+
+export interface PlayerProfile {
+  id: string;
+  name: string;
+  nickname: string;
+  avatar: string;
+  mainRole: string; // e.g. "Main Duelist", "IGL / Sentinel", "Mid Laner", "Main AWPer"
+  rank?: string;
+  favoriteAgent?: string;
+}
+
+export interface TeamProfile {
+  id: string;
+  name: string;
+  tag: string;
+  logo: string;
+  primaryColor?: string;
+  players: PlayerProfile[];
+}
 
 export interface User {
   id: string;
@@ -20,8 +39,9 @@ export interface Team {
 export interface Agent {
   id: string;
   name: string;
-  role: "Duelist" | "Initiator" | "Controller" | "Sentinel";
+  role: "Duelist" | "Initiator" | "Controller" | "Sentinel" | string;
   image: string;
+  fullPortrait?: string;
 }
 
 export interface DraftPick {
@@ -101,5 +121,14 @@ export type DraftAction =
   | { type: "LOCK"; slotIndex: number; agent: Agent }
   | { type: "NEXT_TURN"; nextIndex: number }
   | { type: "RANDOM_MAP"; map: string }
+  | { type: "DECIDER_MAP"; map: string }
   | { type: "MAP_VETO"; phase: "ban_a" | "ban_b" | "pick_a" | "pick_b"; map: string }
-  | { type: "RESET" };
+  | { type: "TOSSING_COIN" }
+  | { type: "COIN_TOSS"; result: "team_a" | "team_b" }
+  | { type: "VOTE_MVP"; slotId: string; voterId: string }
+  | { type: "VOTE_PREDICTION"; prediction: "team_a_2_0" | "team_a_2_1" | "team_b_2_0" | "team_b_2_1"; voterId: string }
+  | { type: "UPDATE_TEAM_ROSTER"; teamId: "team_a" | "team_b"; roster: TeamProfile }
+  | { type: "APPLY_TEAM_COMPOSITION"; teamId: "team_a" | "team_b"; agents: Agent[] }
+  | { type: "CHANGE_GAME"; game: Game }
+  | { type: "RESET" }
+  | { type: "SYNC_TIMER"; deadline: number };
