@@ -60,8 +60,9 @@ export function DraftLobby() {
   };
 
   const getShareUrl = (role: string) => {
-    const base = window.location.origin;
-    return `${base}/draft/${createdRoom?.id}?role=${role}`;
+    const origin = window.location.origin;
+    const pathname = window.location.pathname;
+    return `${origin}${pathname}#/draft/${createdRoom?.id}?role=${role}`;
   };
 
   const copyUrl = (role: string) => {

@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { 
   RefreshCcw, 
   Play, 
@@ -272,14 +272,14 @@ export function DraftRoom() {
             </button>
           )}
 
-          <a
-            href={`/overlay/${roomId}`}
+          <Link
+            to={`/overlay/draft/${roomId}`}
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-2 px-4 py-2 bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 text-xs font-display tracking-widest uppercase rounded-full transition-all border border-purple-500/40"
           >
             OBS Overlay
-          </a>
+          </Link>
         </div>
       </div>
 

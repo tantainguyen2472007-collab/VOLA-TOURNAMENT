@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { AuthContext } from "./lib/auth";
 import { useAuthProvider } from "./hooks/useAuth";
 import { AuthGuard } from "./components/AuthGuard";
@@ -27,7 +27,7 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={auth}>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/overlay/draft/:roomId" element={<DraftOverlayPage />} />
           <Route path="/overlay/map-veto/:roomId" element={<MapVetoOverlayPage />} />
@@ -68,7 +68,7 @@ export default function App() {
           {/* LiveMatch: full screen, no sidebar */}
           <Route path="/live/:matchId" element={<LiveMatch />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AuthContext.Provider>
   );
 }

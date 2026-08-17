@@ -246,14 +246,14 @@ export function Dashboard() {
                 </div>
                 
                 <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <a
-                    href={`/overlay/draft/${room.id}`}
+                  <Link
+                    to={`/overlay/draft/${room.id}`}
                     target="_blank"
                     className="px-6 py-3 bg-white/5 hover:bg-white/10 text-white/60 hover:text-white rounded-full font-bold text-xs uppercase tracking-widest transition-colors flex items-center gap-2 border border-white/5"
                   >
                     <ExternalLink className="w-3 h-3" />
                     OBS OVERLAY
-                  </a>
+                  </Link>
                   <Link
                     to={`/draft/${room.id}`}
                     className="px-6 py-3 bg-white hover:bg-gray-200 text-black rounded-full font-bold text-xs uppercase tracking-widest transition-colors shadow-lg"
