@@ -75,6 +75,7 @@ export interface ProPlayerSetting {
   verificationStatus: "verified" | "partially_verified" | "unverified";
   lastVerifiedDate: string;
   verificationSource?: string;
+  sourceUrl?: string;
 }
 
 export interface EloShapesData {
@@ -115,4 +116,5 @@ export interface GamingGearItem {
   ratingLabel: string;
   verificationStatus: "verified" | "partially_verified" | "unverified";
   lastVerifiedDate: string;
+  sourceUrl?: string;
 }

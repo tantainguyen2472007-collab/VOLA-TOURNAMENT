@@ -35,8 +35,24 @@ import {
 import { PRO_SETTINGS_LIST, GEAR_DATABASE, ProPlayerSetting, GamingGearItem } from "../data/proSettings";
 import { sound } from "../lib/sounds";
 
+const SourceLink = ({ url, date }: { url: string; date: string }) => (
+  <a href={url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-[10px] text-cyan-300 hover:text-cyan-200 underline underline-offset-2" title={`Nguồn: ${url}`}>
+    <ExternalLink className="w-3 h-3" /> Nguồn · {date}
+  </a>
+);
+
 // Verification badge component
-const VerificationBadge = ({ status, date, source }: { status: string; date: string; source?: string }) => {
+const VerificationBadge = ({ 
+  status, 
+  date, 
+  source, 
+  sourceUrl 
+}: { 
+  status: "verified" | "partially_verified" | "unverified"; 
+  date: string; 
+  source?: string;
+  sourceUrl?: string;
+}) => {
   const config = status === 'verified'
     ? { icon: ShieldCheck, label: 'Verified', cls: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30' }
     : status === 'partially_verified'
@@ -487,6 +503,9 @@ export function ProSettings() {
                     <p className="text-xs text-gray-400 mt-0.5">
                       Vai trò: <span className="text-cyan-300 font-semibold">{selectedPlayer.role}</span> • Thế cầm chuột: <span className="text-purple-300 font-semibold">{selectedPlayer.mouse.mouseGrip}</span>
                     </p>
+                    <div className="mt-1">
+                      {selectedPlayer.sourceUrl ? <SourceLink url={selectedPlayer.sourceUrl} date={selectedPlayer.lastVerifiedDate} /> : <span className="text-[10px] text-gray-500">Chưa có URL nguồn riêng</span>}
+                    </div>
                   </div>
                 </div>
 
@@ -1232,6 +1251,7 @@ export function ProSettings() {
                     </div>
                     <div className="flex items-center justify-between text-[10px] text-gray-500 mt-1">
                       <VerificationBadge status={gear.verificationStatus} date={gear.lastVerifiedDate} />
+                      {gear.sourceUrl ? <SourceLink url={gear.sourceUrl} date={gear.lastVerifiedDate} /> : <span>Chưa có nguồn sản phẩm</span>}
                     </div>
                     <button
                       onClick={(e) => {
