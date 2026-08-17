@@ -1,6 +1,6 @@
 {
-  "name": "ESP Tournament Platform - Valorant Draft & Bracket Engine",
-  "description": "Professional esports tournament platform featuring real-time Multi-game Ban/Pick draft rooms, BO3 Map Veto with Decider randomizer, Double Elimination & Swiss tournament systems, Pick'em predictions, Team Roster management, AI composition synergy analyzer, and OBS overlays.",
+  "name": "VOLA",
+  "description": "Professional Valorant tactical platform featuring real-time Ban/Pick draft rooms, BO3 Map Veto with Decider randomizer, Double Elimination & Swiss tournament systems, Pro Settings, Skin database, AI synergy analyzer, and OBS overlays in a signature red & black theme.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -1,7 +1,3 @@
-import { LINEUP_SOURCE_STATE } from "./dataProvenance";
-
-export { LINEUP_SOURCE_STATE };
-
 export interface LineupStep {
   stepNumber: number;
   title: string;

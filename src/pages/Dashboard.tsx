@@ -66,7 +66,7 @@ export function Dashboard() {
         </div>
         <Link
           to="/lobby"
-          className="px-6 py-3 bg-accent text-black font-display tracking-widest text-sm rounded-full hover:bg-yellow-400 transition-colors uppercase shadow-[0_0_20px_rgba(234,179,8,0.2)] flex items-center gap-2"
+          className="px-6 py-3 bg-red-600 text-white font-display tracking-widest text-sm rounded-full hover:bg-red-500 transition-all uppercase shadow-[0_0_20px_rgba(239,68,68,0.35)] flex items-center gap-2 border border-red-500/40"
         >
           <Plus className="w-4 h-4" />
           TẠO TRẬN ĐẤU MỚI
@@ -75,9 +75,9 @@ export function Dashboard() {
 
       {/* Quick Tools Navigation Grid */}
       <div className="mb-12">
-        <h2 className="text-xs font-bold tracking-widest mb-4 flex items-center gap-2 text-gray-400 uppercase">
-          <Sparkles className="w-4 h-4 text-cyan-400" />
-          CÔNG CỤ CHIẾN THUẬT & TRẢI NGHIỆM VALORANT
+        <h2 className="text-xs font-bold tracking-widest mb-4 flex items-center gap-2 text-neutral-400 uppercase">
+          <Sparkles className="w-4 h-4 text-red-500" />
+          CÔNG CỤ CHIẾN THUẬT & TRẢI NGHIỆM VOLA
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

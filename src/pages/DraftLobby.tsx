@@ -76,7 +76,7 @@ export function DraftLobby() {
       <p className="text-gray-400 mb-8">Tạo phòng mới và chia sẻ link cho các đội</p>
 
       {!createdRoom ? (
-        <div className="bg-[#111] border border-[#222] rounded-xl p-6 space-y-4">
+        <div className="bg-[#0e0e0e] border border-neutral-800 rounded-xl p-6 space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-400 mb-1">Tên phòng (tuỳ chọn)</label>
             <input
@@ -84,7 +84,7 @@ export function DraftLobby() {
               value={roomName}
               onChange={(e) => setRoomName(e.target.value)}
               placeholder="VD: Bán kết VCT 2026..."
-              className="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-yellow-500 transition-colors"
+              className="w-full bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-red-500 transition-colors"
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -94,7 +94,7 @@ export function DraftLobby() {
                 type="text"
                 value={teamA}
                 onChange={(e) => setTeamA(e.target.value)}
-                className="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2.5 text-[#00E5FF] font-bold focus:outline-none focus:border-yellow-500 transition-colors"
+                className="w-full bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2.5 text-red-400 font-bold focus:outline-none focus:border-red-500 transition-colors"
               />
             </div>
             <div>
@@ -103,14 +103,14 @@ export function DraftLobby() {
                 type="text"
                 value={teamB}
                 onChange={(e) => setTeamB(e.target.value)}
-                className="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2.5 text-[#FF4655] font-bold focus:outline-none focus:border-yellow-500 transition-colors"
+                className="w-full bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2.5 text-[#FF4655] font-bold focus:outline-none focus:border-red-500 transition-colors"
               />
             </div>
           </div>
           <button
             onClick={handleCreate}
             disabled={loading || !teamA || !teamB}
-            className="w-full py-3 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-lg transition-colors disabled:opacity-50 flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(234,179,8,0.2)]"
+            className="w-full py-3 bg-red-600 hover:bg-red-500 text-white font-bold rounded-lg transition-all disabled:opacity-50 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(239,68,68,0.35)] border border-red-500/30"
           >
             <Play className="w-5 h-5 fill-current" />
             {loading ? "ĐANG TẠO..." : "TẠO PHÒNG DRAFT"}
@@ -118,7 +118,7 @@ export function DraftLobby() {
         </div>
       ) : (
         <div className="space-y-6">
-          <div className="bg-[#111] border border-[#222] rounded-xl p-6">
+          <div className="bg-[#0e0e0e] border border-neutral-800 rounded-xl p-6">
             <h2 className="text-lg font-bold text-white mb-1">Phòng đã tạo thành công!</h2>
             <p className="text-gray-400 text-sm mb-6">
               {createdRoom.team_a_name} vs {createdRoom.team_b_name}
@@ -127,12 +127,12 @@ export function DraftLobby() {
             <h3 className="text-sm font-bold text-gray-300 mb-3">CHIA SẺ LINK CHO TỪNG VAI TRÒ</h3>
             <div className="space-y-3">
               {([
-                ["captain_a", `ĐỘI TRƯỞNG ${createdRoom.team_a_name}`, "text-[#00E5FF]"],
+                ["captain_a", `ĐỘI TRƯỞNG ${createdRoom.team_a_name}`, "text-red-400"],
                 ["captain_b", `ĐỘI TRƯỞNG ${createdRoom.team_b_name}`, "text-[#FF4655]"],
-                ["caster", "CASTER / BTV", "text-yellow-500"],
+                ["caster", "CASTER / BTV", "text-red-500"],
                 ["viewer", "KHÁN GIẢ (Chỉ xem)", "text-gray-400"],
               ] as const).map(([role, label, color]) => (
-                <div key={role} className="flex items-center gap-3 bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-3">
+                <div key={role} className="flex items-center gap-3 bg-[#161616] border border-neutral-800 rounded-lg px-4 py-3">
                   <Users className={`w-4 h-4 ${color}`} />
                   <span className={`text-sm font-bold ${color} flex-shrink-0`}>{label}</span>
                   <code className="flex-1 text-xs text-gray-500 truncate">{getShareUrl(role)}</code>
@@ -150,7 +150,7 @@ export function DraftLobby() {
 
           <button
             onClick={() => navigate(`/draft/${createdRoom.id}?role=admin`)}
-            className="w-full py-4 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-lg transition-colors flex items-center justify-center gap-2 text-lg shadow-[0_0_15px_rgba(234,179,8,0.2)]"
+            className="w-full py-4 bg-red-600 hover:bg-red-500 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2 text-lg shadow-[0_0_20px_rgba(239,68,68,0.35)] border border-red-500/30"
           >
             <Play className="w-6 h-6 fill-current" />
             VÀO PHÒNG DRAFT (ADMIN)

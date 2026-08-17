@@ -45,6 +45,8 @@ export default function App() {
           >
             <Route index element={<Dashboard />} />
             <Route path="skins" element={<Skins />} />
+            <Route path="night-market" element={<Skins />} />
+            <Route path="wishlist" element={<Skins />} />
             <Route path="pro-settings" element={<ProSettings />} />
             <Route path="crosshairs" element={<ProSettings />} />
             <Route path="setups" element={<MapLineups />} />

@@ -18,7 +18,7 @@ export function Tournaments() {
         </div>
         <Link
           to="/tournaments/new"
-          className="px-6 py-3 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-lg flex items-center gap-2 transition-colors shadow-[0_0_15px_rgba(234,179,8,0.2)]"
+          className="px-6 py-3 bg-red-600 hover:bg-red-500 text-white font-bold rounded-lg flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(239,68,68,0.3)] border border-red-500/30"
         >
           <Plus className="w-5 h-5" />
           TẠO GIẢI ĐẤU MỚI
@@ -27,13 +27,13 @@ export function Tournaments() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {MOCK_TOURNAMENTS.map((t) => (
-          <div key={t.id} className="bg-[#111] border border-[#222] hover:border-[#444] transition-colors rounded-xl p-6 flex flex-col">
+          <div key={t.id} className="bg-[#0e0e0e] border border-neutral-800 hover:border-red-500/40 transition-colors rounded-xl p-6 flex flex-col group">
             <div className="flex justify-between items-start mb-4">
-              <div className="w-12 h-12 rounded-lg bg-[#1A1A1A] flex items-center justify-center">
-                <Trophy className="w-6 h-6 text-yellow-500" />
+              <div className="w-12 h-12 rounded-lg bg-neutral-900 border border-neutral-800 flex items-center justify-center group-hover:border-red-500/30 transition-colors">
+                <Trophy className="w-6 h-6 text-red-500" />
               </div>
               <span className={`text-xs font-bold px-3 py-1 rounded-full ${
-                t.status === "Ongoing" ? "bg-red-500/10 text-red-500 border border-red-500/20" : "bg-blue-500/10 text-blue-500 border border-blue-500/20"
+                t.status === "Ongoing" ? "bg-red-500/10 text-red-500 border border-red-500/20" : "bg-neutral-800 text-neutral-400 border border-neutral-700"
               }`}>
                 {t.status === "Ongoing" ? "ĐANG DIỄN RA" : "SẮP DIỄN RA"}
               </span>

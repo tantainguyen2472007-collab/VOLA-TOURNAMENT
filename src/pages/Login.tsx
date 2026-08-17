@@ -33,21 +33,21 @@ export function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#050505] flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-10 h-10 bg-yellow-500 rounded flex items-center justify-center font-bold text-black italic text-lg">
-              ESP
+          <div className="inline-flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-rose-700 rounded-xl flex items-center justify-center font-bold text-white text-2xl shadow-[0_0_20px_rgba(239,68,68,0.4)] border border-red-500/30">
+              V
             </div>
-            <span className="font-bold text-2xl text-white">TOURNAMENT</span>
+            <span className="font-bold text-3xl text-white tracking-widest font-display">VOLA</span>
           </div>
-          <p className="text-gray-400 text-sm">Nền tảng quản lý giải đấu eSports</p>
+          <p className="text-neutral-400 text-sm">Nền tảng chiến thuật & quản lý giải đấu Valorant</p>
         </div>
 
-        <div className="bg-[#111] border border-[#222] rounded-xl p-6">
+        <div className="bg-[#0e0e0e] border border-neutral-800 rounded-2xl p-6 shadow-2xl">
           {/* Mode tabs */}
-          <div className="flex gap-1 mb-6 bg-[#0A0A0A] rounded-lg p-1">
+          <div className="flex gap-1 mb-6 bg-[#161616] rounded-lg p-1 border border-white/5">
             {([
               ["login", "ĐĂNG NHẬP"],
               ["register", "ĐĂNG KÝ"],
@@ -56,10 +56,10 @@ export function Login() {
               <button
                 key={key}
                 onClick={() => setMode(key)}
-                className={`flex-1 py-2 text-xs font-bold rounded-md transition-colors ${
+                className={`flex-1 py-2 text-xs font-bold rounded-md transition-all ${
                   mode === key
-                    ? "bg-yellow-500 text-black"
-                    : "text-gray-400 hover:text-white"
+                    ? "bg-red-600 text-white shadow-[0_0_12px_rgba(239,68,68,0.4)]"
+                    : "text-neutral-400 hover:text-white"
                 }`}
               >
                 {label}
@@ -70,7 +70,7 @@ export function Login() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {mode !== "login" && (
               <div>
-                <label className="block text-sm font-medium text-gray-400 mb-1">
+                <label className="block text-sm font-medium text-neutral-300 mb-1">
                   Tên hiển thị
                 </label>
                 <input
@@ -78,7 +78,7 @@ export function Login() {
                   value={displayName}
                   onChange={(e) => setDisplayName(e.target.value)}
                   placeholder="VD: ProGamer123"
-                  className="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-yellow-500 transition-colors"
+                  className="w-full bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-red-500 transition-colors"
                 />
               </div>
             )}
@@ -86,24 +86,24 @@ export function Login() {
             {mode !== "guest" && (
               <>
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-1">Email</label>
+                  <label className="block text-sm font-medium text-neutral-300 mb-1">Email</label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="email@example.com"
-                    className="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-yellow-500 transition-colors"
+                    className="w-full bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-red-500 transition-colors"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-1">Mật khẩu</label>
+                  <label className="block text-sm font-medium text-neutral-300 mb-1">Mật khẩu</label>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-yellow-500 transition-colors"
+                    className="w-full bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-red-500 transition-colors"
                     required
                     minLength={6}
                   />
@@ -112,7 +112,7 @@ export function Login() {
             )}
 
             {error && (
-              <p className="text-red-500 text-sm bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-2">
+              <p className="text-red-400 text-sm bg-red-950/40 border border-red-500/30 rounded-lg px-4 py-2">
                 {error}
               </p>
             )}
@@ -120,7 +120,7 @@ export function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-lg transition-colors disabled:opacity-50 shadow-[0_0_15px_rgba(234,179,8,0.2)]"
+              className="w-full py-3 bg-red-600 hover:bg-red-500 text-white font-bold rounded-lg transition-all disabled:opacity-50 shadow-[0_0_20px_rgba(239,68,68,0.35)]"
             >
               {loading
                 ? "ĐANG XỬ LÝ..."

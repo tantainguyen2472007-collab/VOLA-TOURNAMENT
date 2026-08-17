@@ -26,7 +26,7 @@ import {
   Maximize2,
   AlertTriangle
 } from "lucide-react";
-import { MAP_LINEUPS_DATA, AbilityLineup, CUSTOM_GAME_COMMANDS, LINEUP_SOURCE_STATE } from "../data/mapLineups";
+import { MAP_LINEUPS_DATA, AbilityLineup, CUSTOM_GAME_COMMANDS } from "../data/mapLineups";
 import { InGameHUDVisualizer } from "../components/InGameHUDVisualizer";
 import { sound } from "../lib/sounds";
 
@@ -252,15 +252,6 @@ export function MapLineups() {
           </div>
         </div>
       )}
-
-      <div className="mb-5 flex items-start gap-3 rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-xs text-amber-100">
-        <Info className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
-        <div>
-          <strong>LineupsValorant: chưa nhập dữ liệu.</strong> Robots.txt cấm endpoint lấy lineup chi tiết và callout. Không cào ảnh/hướng dẫn từ nguồn này.
-          <a href={LINEUP_SOURCE_STATE.source.sourceUrl} target="_blank" rel="noreferrer" className="ml-1 text-cyan-300 underline underline-offset-2">Xem nguồn</a>
-          <span className="ml-1 text-amber-300">· kiểm tra {LINEUP_SOURCE_STATE.source.lastVerified}</span>
-        </div>
-      </div>
 
       {/* Filter Toolbar */}
       <div className="mt-6 flex flex-col gap-4 bg-[#111115] p-5 rounded-3xl border border-white/10 shadow-xl">

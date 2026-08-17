@@ -42,7 +42,7 @@ export function CreateTournament() {
         </div>
         <button 
           onClick={handleSave}
-          className="px-6 py-3 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-lg flex items-center gap-2 transition-colors shadow-[0_0_15px_rgba(234,179,8,0.2)]"
+          className="px-6 py-3 bg-red-600 hover:bg-red-500 text-white font-bold rounded-lg flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(239,68,68,0.3)] border border-red-500/30"
         >
           <Save className="w-5 h-5" />
           LƯU GIẢI ĐẤU
@@ -52,9 +52,9 @@ export function CreateTournament() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Thông tin cơ bản */}
         <div className="md:col-span-2 space-y-6">
-          <div className="bg-[#111] border border-[#222] rounded-xl p-6">
+          <div className="bg-[#0e0e0e] border border-neutral-800 rounded-xl p-6">
             <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-              <Settings2 className="w-5 h-5 text-yellow-500" />
+              <Settings2 className="w-5 h-5 text-red-500" />
               Thông tin chung & Thể thức
             </h2>
             
@@ -67,7 +67,7 @@ export function CreateTournament() {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="VD: VCT Pacific 2026..." 
-                  className="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-yellow-500 transition-colors"
+                  className="w-full bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-red-500 transition-colors"
                 />
               </div>
               
@@ -78,7 +78,7 @@ export function CreateTournament() {
                     name="game"
                     value={formData.game}
                     onChange={handleChange}
-                    className="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-yellow-500 transition-colors"
+                    className="w-full bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-red-500 transition-colors"
                   >
                     <option value="Valorant">Valorant</option>
                     <option value="LoL">Liên Minh Huyền Thoại</option>
@@ -91,7 +91,7 @@ export function CreateTournament() {
                     name="format"
                     value={formData.format}
                     onChange={handleChange}
-                    className="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-yellow-500 transition-colors"
+                    className="w-full bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-red-500 transition-colors"
                   >
                     <option value="Single Elimination">Loại trực tiếp (Single Elim)</option>
                     <option value="Double Elimination">Nhánh Thắng/Thua (Double Elim)</option>
@@ -104,35 +104,35 @@ export function CreateTournament() {
             </div>
           </div>
 
-          <div className="bg-[#111] border border-[#222] rounded-xl p-6">
+          <div className="bg-[#0e0e0e] border border-neutral-800 rounded-xl p-6">
             <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-              <ShieldAlert className="w-5 h-5 text-yellow-500" />
+              <ShieldAlert className="w-5 h-5 text-red-500" />
               Scoring Rules Engine (Cấu hình tính điểm JSON)
             </h2>
             
             <div className="grid grid-cols-3 gap-4 mb-6">
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-1">Điểm Thắng</label>
-                <input type="number" name="winPoints" value={formData.winPoints} onChange={handleChange} className="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2 text-white text-center font-bold focus:border-yellow-500 focus:outline-none" />
+                <input type="number" name="winPoints" value={formData.winPoints} onChange={handleChange} className="w-full bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2 text-white text-center font-bold focus:border-red-500 focus:outline-none" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-1">Điểm Hòa</label>
-                <input type="number" name="drawPoints" value={formData.drawPoints} onChange={handleChange} className="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2 text-white text-center font-bold focus:border-yellow-500 focus:outline-none" />
+                <input type="number" name="drawPoints" value={formData.drawPoints} onChange={handleChange} className="w-full bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2 text-white text-center font-bold focus:border-red-500 focus:outline-none" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-400 mb-1">Điểm Thua</label>
-                <input type="number" name="lossPoints" value={formData.lossPoints} onChange={handleChange} className="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2 text-white text-center font-bold focus:border-yellow-500 focus:outline-none" />
+                <input type="number" name="lossPoints" value={formData.lossPoints} onChange={handleChange} className="w-full bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2 text-white text-center font-bold focus:border-red-500 focus:outline-none" />
               </div>
             </div>
 
-            <div className="p-4 bg-[#1A1A1A] border border-[#333] rounded-lg mb-6">
+            <div className="p-4 bg-[#161616] border border-neutral-800 rounded-lg mb-6">
               <p className="text-sm font-bold text-white mb-3">Hệ số thưởng (Map Score Bonus) - Dành cho BO3/BO5</p>
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-400">Thắng 2-0 / 3-0:</span>
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-gray-500">+</span>
-                    <input type="number" name="bonus20" value={formData.bonus20} onChange={handleChange} className="w-16 bg-[#222] border border-[#444] rounded px-2 py-1 text-white text-center focus:border-yellow-500 focus:outline-none" />
+                    <input type="number" name="bonus20" value={formData.bonus20} onChange={handleChange} className="w-16 bg-[#222] border border-[#444] rounded px-2 py-1 text-white text-center focus:border-red-500 focus:outline-none" />
                     <span className="text-xs text-gray-500">điểm</span>
                   </div>
                 </div>
@@ -140,7 +140,7 @@ export function CreateTournament() {
                   <span className="text-sm text-gray-400">Thắng 2-1 / 3-1:</span>
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-gray-500">+</span>
-                    <input type="number" name="bonus21" value={formData.bonus21} onChange={handleChange} className="w-16 bg-[#222] border border-[#444] rounded px-2 py-1 text-white text-center focus:border-yellow-500 focus:outline-none" />
+                    <input type="number" name="bonus21" value={formData.bonus21} onChange={handleChange} className="w-16 bg-[#222] border border-[#444] rounded px-2 py-1 text-white text-center focus:border-red-500 focus:outline-none" />
                     <span className="text-xs text-gray-500">điểm</span>
                   </div>
                 </div>
@@ -152,7 +152,7 @@ export function CreateTournament() {
               <div className="space-y-3">
                 <div className="flex items-center gap-4">
                   <span className="w-6 h-6 rounded bg-[#222] text-gray-400 flex items-center justify-center text-xs font-bold">1</span>
-                  <select name="tiebreaker1" value={formData.tiebreaker1} onChange={handleChange} className="flex-1 bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-yellow-500">
+                  <select name="tiebreaker1" value={formData.tiebreaker1} onChange={handleChange} className="flex-1 bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-red-500">
                     <option value="head-to-head">Hiệu số đối đầu (Head-to-head)</option>
                     <option value="round-diff">Hiệu số vòng/game (Round/Game Diff)</option>
                     <option value="total-wins">Tổng số round thắng</option>
@@ -160,7 +160,7 @@ export function CreateTournament() {
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="w-6 h-6 rounded bg-[#222] text-gray-400 flex items-center justify-center text-xs font-bold">2</span>
-                  <select name="tiebreaker2" value={formData.tiebreaker2} onChange={handleChange} className="flex-1 bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-yellow-500">
+                  <select name="tiebreaker2" value={formData.tiebreaker2} onChange={handleChange} className="flex-1 bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-red-500">
                     <option value="round-diff">Hiệu số vòng/game (Round/Game Diff)</option>
                     <option value="head-to-head">Hiệu số đối đầu (Head-to-head)</option>
                     <option value="total-wins">Tổng số round thắng</option>
@@ -168,7 +168,7 @@ export function CreateTournament() {
                 </div>
                 <div className="flex items-center gap-4">
                   <span className="w-6 h-6 rounded bg-[#222] text-gray-400 flex items-center justify-center text-xs font-bold">3</span>
-                  <div className="flex-1 bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-2 text-sm text-gray-500">
+                  <div className="flex-1 bg-[#161616] border border-neutral-800 rounded-lg px-4 py-2 text-sm text-gray-500">
                     Trận Tiebreaker / Bốc thăm
                   </div>
                 </div>
@@ -180,9 +180,9 @@ export function CreateTournament() {
 
         {/* Cột Preview Config JSON */}
         <div>
-          <div className="bg-[#0A0A0A] border border-[#222] rounded-xl p-4 sticky top-6">
+          <div className="bg-[#0A0A0A] border border-neutral-800 rounded-xl p-4 sticky top-6">
             <h3 className="text-sm font-bold text-gray-400 mb-4 uppercase tracking-wider">Generated JSON Config</h3>
-            <pre className="text-xs text-[#00E5FF] font-mono overflow-x-auto whitespace-pre-wrap">
+            <pre className="text-xs text-red-400 font-mono overflow-x-auto whitespace-pre-wrap">
 {`{
   "win_points": ${formData.winPoints},
   "loss_points": ${formData.lossPoints},

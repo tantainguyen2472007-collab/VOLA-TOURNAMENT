@@ -3,9 +3,9 @@
 @theme {
   --font-display: "Oswald", "Chakra Petch", "Be Vietnam Pro", sans-serif;
   --font-body: "Be Vietnam Pro", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --color-primary: #00e5ff;
-  --color-danger: #ff4655;
-  --color-accent: #eab308;
+  --color-primary: #ff4655;
+  --color-danger: #ef4444;
+  --color-accent: #ff4655;
 }
 
 body {
@@ -42,17 +42,17 @@ h1, h2, h3, h4, .font-display {
 
 .overlay-head strong:first-child,
 .score-overlay strong:first-child {
-  color: #00e5ff;
+  color: #ff4655;
 }
 
 .overlay-head strong:last-child,
 .score-overlay strong:last-child {
-  color: #ff4655;
+  color: #ef4444;
 }
 
 .overlay-turn {
   margin: 8vh 0 4vh;
-  color: #eab308;
+  color: #ff4655;
   font-size: clamp(18px, 3vw, 48px);
   font-weight: 800;
   text-align: center;
@@ -68,7 +68,7 @@ h1, h2, h3, h4, .font-display {
 .overlay-map {
   padding: 1.3vw;
   background: #111d;
-  border: 1px solid #444;
+  border: 1px solid #333;
   border-radius: 10px;
   text-align: center;
 }
@@ -86,12 +86,12 @@ h1, h2, h3, h4, .font-display {
 }
 
 .overlay-map.picked {
-  border-color: #eab308;
+  border-color: #ff4655;
 }
 
 .overlay-map.decider {
-  background: #00e5ff22;
-  border-color: #00e5ff;
+  background: #ff465522;
+  border-color: #ff4655;
 }
 
 .score-overlay {
